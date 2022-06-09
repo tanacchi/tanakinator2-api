@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  tanakinator2-api:
+    image: tanakinator2-api
+    build:
+      context: .
+      dockerfile: ./Dockerfile
