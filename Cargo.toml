@@ -10,3 +10,4 @@ actix-web = "4"
 diesel = { version = "1.4.4", features = ["mysql"] }
 dotenv = "0.15.0"
 serde = { version = "1.0.137", features = ["derive"] }
+tera = "1"
