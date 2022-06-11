@@ -25,13 +25,12 @@ async fn manual_hello() -> impl Responder {
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let connection = db::establish_connection();
-    let new_question = models::NewQuestion {
-        body: "Question !!!"
-    };
-    diesel::insert_into(questions_schema::dsl::questions)
-        .values(new_question)
-        .execute(&connection)
-        .expect("Error saving new question");
+    db::insert_new_question(&connection, String::from("Ahi"));
+    let all_questions = db::load_all_questions(&connection);
+    all_questions.iter().for_each(|q|
+        println!("{:?}", q)
+    );
+
 
     HttpServer::new(|| {
         App::new()

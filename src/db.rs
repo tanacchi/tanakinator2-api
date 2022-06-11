@@ -26,8 +26,8 @@ pub fn insert_new_question(connection: &diesel::MysqlConnection, body_str: Strin
 }
 
 
-// pub fn load_all_questions(connection: &diesel::MysqlConnection) {
-//     let results = questions_schema::dsl::questions
-//         .load::<models::Question>(connection)
-//         .expect("Error loading questions");
-// }
+pub fn load_all_questions(connection: &diesel::MysqlConnection) -> Vec<models::Question> {
+    questions_schema::dsl::questions
+        .load::<models::Question>(connection)
+        .expect("Error loading questions")
+}
