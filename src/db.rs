@@ -30,3 +30,11 @@ pub fn load_all_questions(connection: &diesel::MysqlConnection) -> Vec<models::Q
         .load::<models::Question>(connection)
         .expect("Error loading questions")
 }
+
+
+pub fn get_question(connection: &diesel::MysqlConnection, id: i64) -> models::Question {
+    questions_schema::dsl::questions
+        .find(id)
+        .get_result::<models::Question>(connection)
+        .expect("Error getting the question")
+}
