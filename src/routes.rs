@@ -11,5 +11,6 @@ pub fn app_config(config: &mut web::ServiceConfig) {
         .service(
             web::scope("/questions")
                 .service(handler::question::get_all_questions)
+                .service(handler::question::get_question_by_id)
         );
 }
