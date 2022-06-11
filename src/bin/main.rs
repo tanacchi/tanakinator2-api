@@ -6,7 +6,7 @@ use tanakinator2_api::{handler, routes};
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
-            .service(handler::hello)
+            .service(handler::common::root)
             .configure(routes::app_config)
     })
     .bind(("127.0.0.1", 8080))?

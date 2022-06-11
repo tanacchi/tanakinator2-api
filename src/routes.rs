@@ -6,10 +6,10 @@ pub fn app_config(config: &mut web::ServiceConfig) {
     config
         .service(
             web::scope("/ui")
-                .service(handler::manual_hello)
+                .service(handler::ui::manual_hello)
         )
         .service(
             web::scope("/questions")
-                .service(handler::get_all_questions)
+                .service(handler::question::get_all_questions)
         );
 }
