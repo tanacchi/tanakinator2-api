@@ -3,7 +3,6 @@ use diesel::mysql::MysqlConnection;
 use dotenv;
 use std::env;
 use crate::models;
-use crate::schema::questions::dsl::*;
 use crate::schema::questions as questions_schema;
 
 pub fn establish_connection() -> MysqlConnection {
