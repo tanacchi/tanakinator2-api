@@ -1,8 +1,5 @@
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
-use diesel::prelude::*;
 use tanakinator2_api::db;
-use tanakinator2_api::models;
-use tanakinator2_api::schema::questions as questions_schema;
 
 
 #[get("/")]
