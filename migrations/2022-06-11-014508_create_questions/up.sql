@@ -1,4 +1,0 @@
-CREATE TABLE questions (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    body TEXT
-)
