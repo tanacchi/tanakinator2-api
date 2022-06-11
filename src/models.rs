@@ -1,6 +1,8 @@
 use crate::schema::questions;
+use serde::Serialize;
 
-#[derive(Queryable, Debug)]
+
+#[derive(Queryable, Debug, Serialize)]
 pub struct Question {
     pub id: i64,
     pub body: Option<String>,

@@ -9,7 +9,7 @@ pub fn app_config(config: &mut web::ServiceConfig) {
                 .service(handler::manual_hello)
         )
         .service(
-            web::scope("/question")
-                .service(handler::manual_hello)
+            web::scope("/questions")
+                .service(handler::get_all_questions)
         );
 }
