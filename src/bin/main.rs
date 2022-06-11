@@ -1,4 +1,8 @@
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
+use diesel::prelude::*;
+use tanakinator2_api::db;
+use tanakinator2_api::models;
+use tanakinator2_api::schema::questions as questions_schema;
 
 
 #[get("/")]
@@ -20,6 +24,14 @@ async fn manual_hello() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    let connection = db::establish_connection();
+    let new_question = models::NewQuestion {
+        body: "Question !!!"
+    };
+    diesel::insert_into(questions_schema::dsl::questions)
+        .values(new_question)
+        .execute(&connection)
+        .expect("Error saving new question");
 
     HttpServer::new(|| {
         App::new()
