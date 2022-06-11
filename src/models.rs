@@ -1,9 +1,9 @@
 use crate::schema::questions;
 
-#[derive(Queryable)]
+#[derive(Queryable, Debug)]
 pub struct Question {
     pub id: i64,
-    pub body: String,
+    pub body: Option<String>,
 }
 
 
