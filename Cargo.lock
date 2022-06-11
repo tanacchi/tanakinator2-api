@@ -1313,6 +1313,7 @@ dependencies = [
  "actix-web",
  "diesel",
  "dotenv",
+ "lazy_static",
  "serde",
  "tera",
 ]
