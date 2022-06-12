@@ -7,6 +7,7 @@ use actix_web::{
 use tera::{Context, Tera};
 use lazy_static::lazy_static;
 use crate::models;
+use reqwest::{self, Url};
 
 lazy_static! {
     pub static ref TEMPLATES: Tera = {
@@ -59,6 +60,21 @@ pub async fn post_new_question(new_question: web::Form<models::NewQuestion>) -> 
 
 #[get("/list")]
 pub async fn list_questions() -> impl Responder {
+    // let _request_path = "http://".to_owned() + header::HOST.as_str() + "/questions/";
+    let _request_path = "http://localhost:8080/questions/";
+    let request_path = Url::parse(&_request_path).unwrap();
+    println!("{}", &request_path);
+    let questions = match reqwest::get(request_path.as_str()).await {
+        Ok(res) => res,
+        Err(e) => {
+            println!("{}", &e);
+            ::std::process::exit(1);
+        }
+    }.text()
+    .await
+    .unwrap();
+    println!("{:?}", &questions);
+
     let mut context = Context::new();
     let html_body = match TEMPLATES.render("list.html", &context) {
         Ok(s) => s,
