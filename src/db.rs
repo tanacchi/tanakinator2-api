@@ -16,7 +16,7 @@ pub fn establish_connection() -> MysqlConnection {
 
 pub fn insert_new_question(connection: &diesel::MysqlConnection, body_str: String) {
     let new_question = models::NewQuestion {
-        body: &body_str
+        body: body_str,
     };
     diesel::insert_into(questions_schema::dsl::questions)
         .values(new_question)

@@ -11,6 +11,6 @@ pub struct Question {
 
 #[derive(Insertable)]
 #[table_name = "questions"]
-pub struct NewQuestion<'a> {
-    pub body: &'a str,
+pub struct NewQuestion {
+    pub body: String,
 }
