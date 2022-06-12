@@ -55,3 +55,21 @@ pub async fn post_new_question(new_question: web::Form<models::NewQuestion>) -> 
         .append_header((header::LOCATION, destination))
         .finish()
 }
+
+
+#[get("/list")]
+pub async fn list_questions() -> impl Responder {
+    let mut context = Context::new();
+    let html_body = match TEMPLATES.render("list.html", &context) {
+        Ok(s) => s,
+        Err(e) => {
+            println!("Rendering error(s): {}", e);
+            ::std::process::exit(1);
+        }
+    };
+    HttpResponse::Ok()
+        .insert_header(
+            ContentType::html()
+        )
+        .body(html_body)
+}
