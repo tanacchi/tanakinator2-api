@@ -1,9 +1,12 @@
 use actix_web::{
-    get, HttpResponse, Responder,
+    get, post,
+    web, http::header,
+    HttpResponse, Responder,
     http::header::ContentType,
 };
 use tera::{Context, Tera};
 use lazy_static::lazy_static;
+use crate::models;
 
 lazy_static! {
     pub static ref TEMPLATES: Tera = {
@@ -43,3 +46,12 @@ pub async fn render_new_question_form() -> impl Responder {
         .body(html_body)
 }
 
+
+#[post("/new")]
+pub async fn post_new_question(new_question: web::Form<models::NewQuestion>) -> impl Responder {
+    println!("{}", new_question.body);
+    let destination = "/ui/top";
+    HttpResponse::TemporaryRedirect()
+        .append_header((header::LOCATION, destination))
+        .finish()
+}

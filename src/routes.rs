@@ -8,6 +8,7 @@ pub fn app_config(config: &mut web::ServiceConfig) {
             web::scope("/ui")
                 .service(handler::ui::manual_hello)
                 .service(handler::ui::render_new_question_form)
+                .service(handler::ui::post_new_question)
         )
         .service(
             web::scope("/questions")

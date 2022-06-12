@@ -1,5 +1,5 @@
 use crate::schema::questions;
-use serde::Serialize;
+use serde::{Serialize, Deserialize};
 
 
 #[derive(Queryable, Debug, Serialize)]
@@ -9,7 +9,7 @@ pub struct Question {
 }
 
 
-#[derive(Insertable)]
+#[derive(Insertable, Deserialize)]
 #[table_name = "questions"]
 pub struct NewQuestion {
     pub body: String,
