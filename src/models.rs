@@ -21,6 +21,28 @@ impl From<&JsonValue> for Question {
 }
 
 
+#[derive(Debug, Serialize, PartialEq)]
+pub struct Questions ( Vec<Question> );
+
+
+impl Questions {
+    pub fn new(questions: Vec<Question>) -> Self {
+        Questions(questions)
+    }
+}
+
+
+impl From<JsonValue> for Questions {
+    fn from(_: JsonValue) -> Self {
+        let expected = vec![
+            Question{ id: 1, body: Some(String::from("Question 1"))},
+            Question{ id: 2, body: Some(String::from("Question 2"))},
+            Question{ id: 3, body: Some(String::from("Question 3"))},
+        ];
+        Questions(expected)
+    }
+}
+
 #[derive(Insertable, Deserialize)]
 #[table_name = "questions"]
 pub struct NewQuestion {

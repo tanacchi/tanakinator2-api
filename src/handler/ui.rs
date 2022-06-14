@@ -93,7 +93,7 @@ pub async fn list_questions() -> impl Responder {
 
 #[cfg(test)]
 mod tests {
-    use crate::models::Question;
+    use crate::models::{Question, Questions};
 
     #[test]
     fn should_parse_json_to_questions() {
@@ -107,5 +107,13 @@ mod tests {
 
         let expected  = Question{ id: 1, body: Some(String::from("Question 1"))};
         assert_eq!(expected, Question::from(&parsed[0]));
+
+        let _expected = vec![
+            Question{ id: 1, body: Some(String::from("Question 1"))},
+            Question{ id: 2, body: Some(String::from("Question 2"))},
+            Question{ id: 3, body: Some(String::from("Question 3"))},
+        ];
+        let expected = Questions::new(_expected);
+        assert_eq!(expected, Questions::from(parsed))
     }
 }
