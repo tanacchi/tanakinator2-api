@@ -43,6 +43,15 @@ impl From<JsonValue> for Questions {
     }
 }
 
+
+// Questions は必要ないかもしれない
+impl Into<Vec<Question>> for Questions {  // for XXX の XXX が独自じゃないといけないだけ
+    fn into(self) -> Vec<Question> {
+        self.0
+    }
+}
+
+
 #[derive(Insertable, Deserialize)]
 #[table_name = "questions"]
 pub struct NewQuestion {

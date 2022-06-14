@@ -6,7 +6,7 @@ use actix_web::{
 };
 use tera::{Context, Tera};
 use lazy_static::lazy_static;
-use crate::models;
+use crate::models::{self, Question, Questions};
 use reqwest::{self, Url};
 
 lazy_static! {
@@ -74,8 +74,11 @@ pub async fn list_questions() -> impl Responder {
     .await
     .unwrap();
     println!("{:?}", &questions);
+    let questions: Questions = json::parse(&questions).unwrap().into();
+    let questions: Vec<Question> = questions.into();
 
     let mut context = Context::new();
+    context.insert("questions", &questions);
     let html_body = match TEMPLATES.render("list.html", &context) {
         Ok(s) => s,
         Err(e) => {
