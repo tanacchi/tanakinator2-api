@@ -8,5 +8,21 @@
 </head>
 <body>
     <h1>Qustion List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>body</th>
+            </tr>
+            <tbody>
+                {% for question in questions %}
+                    <tr>
+                        <td>{{question.id}}</td>
+                        <td>{{question.body}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </thead>
+    </table>
 </body>
 </html>
