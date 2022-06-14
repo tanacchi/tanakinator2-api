@@ -89,3 +89,18 @@ pub async fn list_questions() -> impl Responder {
         )
         .body(html_body)
 }
+
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn should_parse_json_to_questions() {
+        use json;
+
+        let response_body = "[{\"id\":1,\"body\":\"Question 1\"},{\"id\":2,\"body\":\"Question 2\"},{\"id\":3,\"body\":\"Question 3\"}]";
+        let parsed = json::parse(response_body).unwrap();
+
+        assert_eq!(1, parsed[0]["id"]);
+        assert_eq!("Question 1", parsed[0]["body"]);
+    }
+}
