@@ -93,6 +93,8 @@ pub async fn list_questions() -> impl Responder {
 
 #[cfg(test)]
 mod tests {
+    use crate::models::Question;
+
     #[test]
     fn should_parse_json_to_questions() {
         use json;
@@ -102,5 +104,8 @@ mod tests {
 
         assert_eq!(1, parsed[0]["id"]);
         assert_eq!("Question 1", parsed[0]["body"]);
+
+        let expected  = Question{ id: 1, body: Some(String::from("Question 1"))};
+        assert_eq!(expected, Question::from(&parsed[0]));
     }
 }
