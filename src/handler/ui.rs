@@ -51,8 +51,8 @@ pub async fn render_new_question_form() -> impl Responder {
 #[post("/new")]
 pub async fn post_new_question(new_question: web::Form<models::NewQuestion>) -> impl Responder {
     println!("{}", new_question.body);
-    let destination = "/ui/top";
-    HttpResponse::TemporaryRedirect()
+    let destination = "/ui/list";
+    HttpResponse::SeeOther()
         .append_header((header::LOCATION, destination))
         .finish()
 }
